@@ -17,15 +17,14 @@ class RunningBarGraph extends Component {
     const runningData = _.chain(this.props)
       .get('runningData', [])
       .map(entry => {
-        const duration = moment(entry.endDate) - moment(entry.startDate);
-        const pace = moment.duration(duration / entry.totalDistance);
+        const pace = moment.duration(entry.duration / entry.totalDistance, 'minutes');
         return {
           distance: _.round(entry.totalDistance, 2),
             unit: entry.totalDistanceUnit,
           month: moment.utc(entry.startDate).startOf('month').format('YYYY-MM'),
           startDate: entry.startDate,
           endDate: entry.endDate,
-          duration,
+          duration: entry.duration,
           pace,
           speedFormatted: pace.format(`m' s''`)
         }
@@ -46,10 +45,10 @@ class RunningBarGraph extends Component {
       .map(month => ({
         entries: month.entries,
         totalDistance: month.totalDistance,
-        totalAvg: _.round(month.totalDistance / (month.totalDuration / 1000 / 60 / 60), 2),
+        totalAvg: _.round(month.totalDistance / (month.totalDuration / 60), 2),
         month: month.month,
         unit: month.unit,
-        speedFormatted: moment.duration(month.totalDuration / month.totalDistance).format(`m' s''`)
+        speedFormatted: moment.duration(month.totalDuration / month.totalDistance, 'minutes').format(`m' s''`)
       }))
       .value();
 

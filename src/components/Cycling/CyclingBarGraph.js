@@ -17,15 +17,14 @@ class CyclingBarGraph extends Component {
     const cyclingData = _.chain(this.props)
       .get('cyclingData', [])
       .map(entry => {
-        const speed = _.round(entry.totalDistance /
-          moment.duration(moment(entry.endDate).diff(moment(entry.startDate))).asHours(), 2);
+        const speed = _.round(entry.totalDistance / (entry.duration / 60), 2);
         return {
           distance: _.round(entry.totalDistance, 2),
           unit: entry.totalDistanceUnit,
           month: moment.utc(entry.startDate).startOf('month').format('YYYY-MM'),
           startDate: entry.startDate,
           endDate: entry.endDate,
-          duration: moment(entry.endDate) - moment(entry.startDate),
+          duration: entry.duration,
           speed,
           speedFormatted: `${speed} ${entry.totalDistanceUnit}/h`
         }
@@ -44,7 +43,7 @@ class CyclingBarGraph extends Component {
         month: dt
       }))
       .map(month => {
-        const totalAvg = _.round(month.totalDistance / (month.totalDuration / 1000 / 60 / 60), 2);
+        const totalAvg = _.round(month.totalDistance / (month.totalDuration / 60), 2);
         return {
           entries: month.entries,
             totalDistance: month.totalDistance,
