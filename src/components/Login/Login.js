@@ -1,7 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { compose } from 'redux';
+import { Redirect, withRouter } from 'react-router-dom';
 
 import LoginForm from './LoginForm';
 import { login } from '../../actions/user';
@@ -13,13 +13,16 @@ const Login = ({ user, login }) => {
     login({ email, password });
   };
 
+  if (user.email) {
+    return <Redirect to="/" />;
+  }
+
   return (
     <div>
-      {!user.email && <LoginForm onSubmit={handleSubmit}/>}
-      {user.email && <Redirect to="/" />}
+      <LoginForm onSubmit={handleSubmit}/>
     </div>
   );
 };
 
 const mapStateToProps = state => ({ user: state.user });
-export default connect(mapStateToProps, { login })(Login);
+export default compose(withRouter, connect(mapStateToProps, { login }))(Login);
