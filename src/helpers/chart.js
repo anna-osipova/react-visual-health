@@ -23,3 +23,5 @@ export const getChartMargin = () => ({
   bottom: 5,
   left: 5
 });
+
+export const colors = ['#DF7373', '#8EE3EF', '#C33C54', '#FFCF99', '#D6E3F8'];
