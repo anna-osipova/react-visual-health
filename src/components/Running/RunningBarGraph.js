@@ -6,7 +6,7 @@ import { ResponsiveContainer, ComposedChart, Bar, XAxis, YAxis, Tooltip, Cartesi
 import { connect } from 'react-redux';
 import { ChartCustomTooltip } from '../Chart/CustomTooltip';
 import { fetchRunningData } from '../../actions/running';
-import { dateMonthFormatter, getChartMargin } from '../../helpers/chart';
+import { dateMonthFormatter, getChartMargin, colors } from '../../helpers/chart';
 import './RunningBarGraph.css';
 
 class RunningBarGraph extends Component {
@@ -64,8 +64,8 @@ class RunningBarGraph extends Component {
           <Tooltip
             content={<ChartCustomTooltip />}
           />
-          <Bar yAxisId="left" dataKey="totalDistance" fill="#82ca9d" />
-          <Line yAxisId="right" dataKey="totalAvg" type="monotone" strokeWidth={3} />
+          <Bar yAxisId="left" dataKey="totalDistance" fill={colors[0]} />
+          <Line yAxisId="right" dataKey="totalAvg" type="monotone" strokeWidth={3} stroke={colors[1]} />
         </ComposedChart>
       </ResponsiveContainer>
     );
