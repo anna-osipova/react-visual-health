@@ -26,7 +26,7 @@ class RunningBarGraph extends Component {
           endDate: entry.endDate,
           duration: entry.duration,
           pace,
-          speedFormatted: pace.format(`m' s''`)
+          speedFormatted: pace.format(`m' ss''`)
         }
       })
       .groupBy('month')
