@@ -5,10 +5,10 @@ import moment from 'moment';
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts';
 import { connect } from 'react-redux';
 import { fetchCyclingData } from '../../actions/cycling';
-import { generateMonthTicks, dateMonthFormatter, getChartMargin } from '../../helpers/chart';
+import { getChartMargin } from '../../helpers/chart';
 import './CyclingLineGraph.css';
 
-const labelFormatter = date => moment.utc(date).format('DD.MM.YYYY HH:mm');
+const labelFormatter = month => moment.utc(month + 1, 'MM').format('MMM');
 const formatter = (value, name, props) => `${Math.round(value)} ${props.payload.unit}`;
 
 class CyclingLineGraph extends Component {
@@ -18,46 +18,43 @@ class CyclingLineGraph extends Component {
   render() {
     const cyclingData = _.chain(this)
       .get('props.cyclingData', [])
-      .map(entry => ({
-        distance: _.round(entry.totalDistance, 2),
-        unit: entry.totalDistanceUnit,
-        startDate: moment.utc(entry.startDate).valueOf(),
-        endDate: entry.endDate,
-        year: moment.utc(entry.startDate).get('year')
+      .groupBy(entry => moment.utc(entry.startDate).get('year'))
+      .map((yearEntries, year) => ({
+          name: year,
+          data: _.chain(_.times(12)).map((month) => ({
+            distance: _.chain(yearEntries)
+              .filter(entry => moment.utc(entry.startDate).get('month') === month)
+              .sumBy('totalDistance')
+              .value(),
+            unit: 'km',
+            year,
+            month
+          }))
+          .reduce((result, month) => {
+            const total = _.sumBy(result, 'distance');
+            result.push({
+              ...month,
+              [year]: total + month.distance,
+              total: total + month.distance
+            });
+            return result;
+          }, [])
+          .value()
       }))
-      .reduce((entries, entry) => {
-        const total = _.chain(entries)
-          .filter({ year: entry.year })
-          .sumBy('distance')
-          .value();
-
-        // insert zero for start of each year
-        if (total === 0) {
-          entries.push({
-            ...entry,
-            distance: 0,
-            startDate: moment.utc(entry.startDate).startOf('year').valueOf(),
-            endDate: moment.utc(entry.startDate).startOf('year').valueOf()
-          })
-        }
-        entries.push({
-          ...entry,
-          total: total + entry.distance
-        });
-        return entries;
-      }, [])
       .value();
 
     return (
       <ResponsiveContainer width="90%" className="ResponsiveContainer">
         <LineChart height={400} data={cyclingData} margin={getChartMargin()}>
-          <XAxis dataKey="startDate"
-                 tickFormatter={dateMonthFormatter}
-                 ticks={generateMonthTicks(cyclingData, 'startDate')}
-                 scale="time" />
-          <YAxis dataKey="total"/>
+          <XAxis dataKey="month"
+                 tickFormatter={(month) => moment.utc(month + 1, 'MM').format('MMM')}
+                 scale="time"
+          />
+          <YAxis />
           <Tooltip labelFormatter={labelFormatter} formatter={formatter} />
-          <Line type="monotone" dataKey="total" stroke="#8884d8" dot={true} />
+          {cyclingData.map(series => (
+            <Line data={series.data} name={series.name} key={series.name} dataKey={series.name} />
+          ))}
         </LineChart>
       </ResponsiveContainer>
     );
