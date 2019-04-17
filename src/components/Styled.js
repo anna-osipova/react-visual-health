@@ -48,13 +48,16 @@ export const TextField = styled('input')`
 `;
 
 export const Submit = styled('button')`
-  border: none;
+  border: 1px solid;
+  border-radius: 4px;
+  padding: 6px 12px;
   color: rgb(0, 128, 255);
-  font-size: 24px;
+  border-color: rgb(0, 128, 255);
+  font-size: 17px;
   background: none;
   outline: none;
   cursor: pointer;
-  margin-top: 30px;
+  margin-top: 10px;
 `;
 
 export const FooterLink = styled(Link)`
