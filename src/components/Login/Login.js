@@ -19,7 +19,7 @@ const Login = ({ user, login }) => {
 
   return (
     <div>
-      <LoginForm onSubmit={handleSubmit}/>
+      <LoginForm onSubmit={handleSubmit} loading={user.loading} />
     </div>
   );
 };

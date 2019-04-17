@@ -13,7 +13,6 @@ const ScreensHomeDashboard = ({ email }) => {
 
   return (
     <div>
-      Home
       <RunningBarGraph />
       <CyclingLineGraph />
       <CyclingBarGraph />

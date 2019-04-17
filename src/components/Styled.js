@@ -47,7 +47,7 @@ export const TextField = styled('input')`
   }
 `;
 
-export const Submit = styled('input')`
+export const Submit = styled('button')`
   border: none;
   color: rgb(0, 128, 255);
   font-size: 24px;
