@@ -45,8 +45,8 @@ class CyclingBarGraph extends Component {
       .map(month => {
         const totalAvg = _.round(month.totalDistance / (month.totalDuration / 60), 2);
         return {
-          entries: month.entries,
-            totalDistance: month.totalDistance,
+          entries: _.sortBy(month.entries, 'startDate'),
+          totalDistance: month.totalDistance,
           totalAvg,
           month: month.month,
           unit: month.unit,
