@@ -8,6 +8,8 @@ const user = (state = {}, action) => {
     case types.LOGIN_SUCCESS:
       return action.data;
     case types.LOGIN_FAILURE:
+    case types.LOGOUT_SUCCESS:
+    case types.LOGOUT_FAILURE:
       return {};
     default:
       return state;

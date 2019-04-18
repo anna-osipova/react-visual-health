@@ -19,7 +19,16 @@ export const login = ({ email, password }) => dispatch => {
     body: { email, password },
     success: types.LOGIN_SUCCESS,
     failure: types.LOGIN_FAILURE,
-    dispatch,
+    dispatch
+  });
+};
+
+export const logout = () => dispatch => {
+  post({
+    url: urls.LOGOUT,
+    success: types.LOGOUT_SUCCESS,
+    failure: types.LOGOUT_FAILURE,
+    dispatch
   });
 };
 

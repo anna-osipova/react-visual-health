@@ -47,7 +47,7 @@ export const TextField = styled('input')`
   }
 `;
 
-export const Submit = styled('button')`
+export const Button = styled('button')`
   border: 1px solid;
   border-radius: 4px;
   padding: 6px 12px;

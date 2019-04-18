@@ -4,6 +4,7 @@ import { Redirect, withRouter } from 'react-router-dom';
 import CyclingBarGraph from '../../components/Cycling/CyclingBarGraph';
 import CyclingLineGraph from '../../components/Cycling/CyclingLineGraph';
 import RunningBarGraph from '../../components/Running/RunningBarGraph';
+import Logout from '../../components/Logout';
 import { connect } from 'react-redux';
 
 const ScreensHomeDashboard = ({ email }) => {
@@ -16,6 +17,7 @@ const ScreensHomeDashboard = ({ email }) => {
       <RunningBarGraph />
       <CyclingLineGraph />
       <CyclingBarGraph />
+      <Logout />
     </div>
   );
 };

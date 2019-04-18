@@ -5,6 +5,7 @@ export const urls = {
   SIGNUP: `${API}/signup`,
   LOGIN: `${API}/login`,
   LOGIN_WITH_TOKEN: `${API}/token`,
+  LOGOUT: `${API}/logout`,
   CYCLING: `${API}/cycling`,
   RUNNING: `${API}/running`
 };
