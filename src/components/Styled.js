@@ -1,4 +1,4 @@
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import { NavLink } from 'react-router-dom';
 
 export const Body = styled('div')`
@@ -109,4 +109,15 @@ export const TooltipBackground = styled('div')`
 export const TooltipHeader = styled('div')`
   font-size: 1.5em;
   color: #444;
+`;
+
+export const Navbar = styled('div')`
+  display: flex;
+  align-items: center;
+  background-color: blueviolet;
+  color: #FFF;
+`;
+
+export const Screen = styled('div')`
+  margin: 20px 40px;
 `;
