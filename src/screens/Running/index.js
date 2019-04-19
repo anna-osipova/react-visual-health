@@ -3,6 +3,7 @@ import { Redirect, withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import RunningBarGraph from '../../components/Running/RunningBarGraph';
+import RunningLineGraph from '../../components/Running/RunningLineGraph';
 import { Screen } from '../../components/Styled';
 
 const ScreensRunning = ({ email, location }) => {
@@ -13,6 +14,7 @@ const ScreensRunning = ({ email, location }) => {
   return (
     <Screen>
       <RunningBarGraph />
+      <RunningLineGraph />
     </Screen>
   );
 };
