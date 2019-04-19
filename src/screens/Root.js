@@ -14,10 +14,10 @@ class Root extends Component {
       <div className="App">
         <Header />
         <Switch>
+          <Route path="/" exact component={ScreensHomeDashboard} />
           <Route path="/login" component={ScreensUserLogin} />
           <Route path="/cycling" component={ScreensCycling} />
           <Route path="/running" component={ScreensRunning} />
-          <Route path="/" component={ScreensHomeDashboard} />
         </Switch>
       </div>
     );

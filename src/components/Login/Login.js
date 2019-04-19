@@ -6,7 +6,7 @@ import { Redirect, withRouter } from 'react-router-dom';
 import LoginForm from './LoginForm';
 import { login } from '../../actions/user';
 
-const Login = ({ user, login }) => {
+const Login = ({ user, login, from }) => {
   const handleSubmit = e => {
     e.preventDefault();
     const { email: { value: email }, password: { value: password } } = e.target;
@@ -14,7 +14,7 @@ const Login = ({ user, login }) => {
   };
 
   if (user.email) {
-    return <Redirect to="/" />;
+    return <Redirect to={from || '/'} />;
   }
 
   return (

@@ -1,11 +1,29 @@
 import React from 'react';
+import { Redirect, withRouter } from 'react-router-dom';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
 import RunningBarGraph from '../../components/Running/RunningBarGraph';
 import { Screen } from '../../components/Styled';
 
-const ScreensRunning = () => (
-  <Screen>
-    <RunningBarGraph />
-  </Screen>
-);
+const ScreensRunning = ({ email, location }) => {
+  if (!email) {
+    return <Redirect to={{ pathname: '/login', state: { from: location }}} />;
+  }
 
-export default ScreensRunning;
+  return (
+    <Screen>
+      <RunningBarGraph />
+    </Screen>
+  );
+};
+
+function mapStateToProps(state) {
+  const { user } = state;
+  const { email } = user;
+
+  return {
+    email
+  };
+}
+
+export default compose(withRouter, connect(mapStateToProps))(ScreensRunning);

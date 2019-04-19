@@ -1,20 +1,18 @@
 import React from 'react';
 import { compose } from 'redux';
-import { Redirect, withRouter, NavLink } from 'react-router-dom';
-import Logout from '../../components/Logout';
+import { Redirect, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Screen } from '../../components/Styled';
 
-const ScreensHomeDashboard = ({ email }) => {
+const ScreensHomeDashboard = ({ email, location }) => {
   if (!email) {
-    return <Redirect to="/login" />;
+    return <Redirect to={{ pathname: '/login', state: { from: location }}} />;
   }
 
   return (
-    <div>
-      <NavLink to="/cycling">Cycling</NavLink>
-      <NavLink to="/running">Running</NavLink>
-      <Logout />
-    </div>
+    <Screen>
+      <h2>Home</h2>
+    </Screen>
   );
 };
 
