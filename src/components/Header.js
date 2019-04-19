@@ -1,11 +1,15 @@
 import React from 'react';
 
-import { Title } from './Styled';
+import { Title, Link, Navbar } from './Styled';
+import Logout from '../components/Logout';
 
 const Header = () => (
-  <div>
+  <Navbar>
     <Title>Health Graphs</Title>
-  </div>
+    <Link to="/cycling">Cycling</Link>
+    <Link to="/running">Running</Link>
+    <Logout />
+  </Navbar>
 );
 
 export default Header;

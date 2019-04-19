@@ -53,7 +53,7 @@ class RunningBarGraph extends Component {
       .value();
 
     return (
-      <ResponsiveContainer width="90%" className="ResponsiveContainer">
+      <ResponsiveContainer className="ResponsiveContainer">
         <ComposedChart height={400} data={runningData} margin={getChartMargin()} barSize={20}>
           <CartesianGrid strokeDasharray="3 3"/>
           <XAxis dataKey="month"

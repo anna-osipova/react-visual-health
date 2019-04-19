@@ -1,5 +1,5 @@
 import styled from 'react-emotion';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export const Body = styled('div')`
   text-align: center;
@@ -47,12 +47,10 @@ export const TextField = styled('input')`
   }
 `;
 
-export const Button = styled('button')`
+const BaseButton = styled('button')`
   border: 1px solid;
   border-radius: 4px;
   padding: 6px 12px;
-  color: rgb(0, 128, 255);
-  border-color: rgb(0, 128, 255);
   font-size: 17px;
   background: none;
   outline: none;
@@ -60,7 +58,32 @@ export const Button = styled('button')`
   margin-top: 10px;
 `;
 
-export const FooterLink = styled(Link)`
+export const Button = styled(BaseButton)`
+  color: rgb(0, 128, 255);
+  border-color: rgb(0, 128, 255);
+`;
+
+export const ButtonLight = styled(BaseButton)`
+  color: #FFF;
+  border-color: #FFF; 
+`;
+
+export const Link = styled(NavLink)`
+  color: #FFF;
+  text-decoration: none;
+  margin: 22px 0 8px 20px;
+  padding: 10px;
+  line-height: 2em;
+  vertical-align: bottom;
+  &:hover {
+    color: rgba(255, 255, 255, 0.5);
+  }
+  &.active {
+    color: #C9F;
+  }
+`;
+
+export const FooterLink = styled(NavLink)`
   position: fixed;
   left: 0;
   bottom: 15px;

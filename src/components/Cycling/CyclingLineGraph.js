@@ -57,7 +57,7 @@ class CyclingLineGraph extends Component {
     });
 
     return (
-      <ResponsiveContainer width="90%" className="ResponsiveContainer">
+      <ResponsiveContainer className="ResponsiveContainer">
         <LineChart height={400} data={cyclingMonthData} margin={getChartMargin()}>
           <XAxis dataKey="month"
                  tickFormatter={(month) => moment.utc(month + 1, 'MM').format('MMM')}

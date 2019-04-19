@@ -1,9 +1,6 @@
 import React from 'react';
 import { compose } from 'redux';
-import { Redirect, withRouter } from 'react-router-dom';
-import CyclingBarGraph from '../../components/Cycling/CyclingBarGraph';
-import CyclingLineGraph from '../../components/Cycling/CyclingLineGraph';
-import RunningBarGraph from '../../components/Running/RunningBarGraph';
+import { Redirect, withRouter, NavLink } from 'react-router-dom';
 import Logout from '../../components/Logout';
 import { connect } from 'react-redux';
 
@@ -14,9 +11,8 @@ const ScreensHomeDashboard = ({ email }) => {
 
   return (
     <div>
-      <RunningBarGraph />
-      <CyclingLineGraph />
-      <CyclingBarGraph />
+      <NavLink to="/cycling">Cycling</NavLink>
+      <NavLink to="/running">Running</NavLink>
       <Logout />
     </div>
   );

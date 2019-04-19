@@ -11,7 +11,7 @@ import './index.css';
 import Root from './screens/Root';
 import rootReducer from './reducers';
 import { saveState, loadState } from './helpers';
-import { loginWithToken} from './actions';
+import { loginWithToken } from './actions';
 
 momentDurationFormatSetup(moment);
 
