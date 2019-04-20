@@ -102,12 +102,13 @@ export const TooltipBackground = styled('div')`
   background-color: #FFF;
   padding: 5px;
   border: 1px solid #CCC;
-  width: 350px;
-  text-align: left;
+  width: 360px;
+  text-align: right;
+  font-family: "Lucida Console";
 `;
 
 export const TooltipHeader = styled('div')`
-  font-size: 1.5em;
+  font-size: 1.4em;
   color: #444;
 `;
 

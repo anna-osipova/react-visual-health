@@ -17,16 +17,16 @@ class CyclingBarGraph extends Component {
     const cyclingData = _.chain(this.props)
       .get('cyclingData', [])
       .map(entry => {
-        const speed = _.round(entry.totalDistance / (entry.duration / 60), 2);
+        const speed = entry.totalDistance / (entry.duration / 60);
         return {
-          distance: _.round(entry.totalDistance, 2),
+          distance: entry.totalDistance,
           unit: entry.totalDistanceUnit,
           month: moment.utc(entry.startDate).startOf('month').format('YYYY-MM'),
           startDate: entry.startDate,
           endDate: entry.endDate,
           duration: entry.duration,
           speed,
-          speedFormatted: `${speed} ${entry.totalDistanceUnit}/h`
+          speedFormatted: `${speed.toFixed(2)} ${entry.totalDistanceUnit}/h`
         }
       })
       .groupBy('month')
@@ -43,14 +43,14 @@ class CyclingBarGraph extends Component {
         month: dt
       }))
       .map(month => {
-        const totalAvg = _.round(month.totalDistance / (month.totalDuration / 60), 2);
+        const totalAvg = month.totalDistance / (month.totalDuration / 60);
         return {
           entries: _.sortBy(month.entries, 'startDate'),
           totalDistance: month.totalDistance,
           totalAvg,
           month: month.month,
           unit: month.unit,
-          speedFormatted: `${totalAvg} ${month.unit}/h`
+          speedFormatted: `${totalAvg.toFixed(2)} ${month.unit}/h`
         };
       })
       .value();
@@ -66,9 +66,7 @@ class CyclingBarGraph extends Component {
           />
           <YAxis yAxisId="left" orientation="left" dataKey="totalDistance" />
           <YAxis yAxisId="right" orientation="right" dataKey="totalAvg" />
-          <Tooltip
-            content={<ChartCustomTooltip />}
-          />
+          <Tooltip content={<ChartCustomTooltip />} />
           <Bar yAxisId="left" dataKey="totalDistance" fill={colors[0]} />
           <Line yAxisId="right" dataKey="totalAvg" type="monotone" strokeWidth={3} stroke={colors[1]} />
         </ComposedChart>
