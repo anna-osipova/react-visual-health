@@ -20,16 +20,16 @@ class CyclingLineGraph extends Component {
       .get('props.cyclingData', [])
       .groupBy(entry => moment.utc(entry.startDate).get('year'))
       .map((yearEntries, year) => ({
-          name: year,
-          data: _.chain(_.times(12)).map((month) => ({
-            distance: _.chain(yearEntries)
-              .filter(entry => moment.utc(entry.startDate).get('month') === month)
-              .sumBy('totalDistance')
-              .value(),
-            unit: 'km',
-            year,
-            month
-          }))
+        name: year,
+        data: _.chain(_.times(12)).map((month) => ({
+          distance: _.chain(yearEntries)
+            .filter(entry => moment.utc(entry.startDate).get('month') === month)
+            .sumBy('totalDistance')
+            .value(),
+          unit: 'km',
+          year,
+          month
+        }))
           .reduce((result, month) => {
             const total = _.sumBy(result, 'distance');
             result.push({
@@ -59,9 +59,8 @@ class CyclingLineGraph extends Component {
     return (
       <ResponsiveContainer className="ResponsiveContainer">
         <LineChart height={400} data={cyclingMonthData} margin={getChartMargin()}>
-          <XAxis dataKey="month"
-                 tickFormatter={(month) => moment.utc(month + 1, 'MM').format('MMM')}
-          />
+          <CartesianGrid strokeDasharray="3 3"/>
+          <XAxis dataKey="month" tickFormatter={(month) => moment.utc(month + 1, 'MM').format('MMM')} />
           <YAxis />
           <Tooltip labelFormatter={labelFormatter} formatter={formatter} />
           {years.map((year, i) => (

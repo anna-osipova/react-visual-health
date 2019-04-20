@@ -51,8 +51,5 @@
     "watch": "webpack-serve --config config/webpack.config.dev.js",
     "build": "rm -rf build; webpack-cli --config config/webpack.config.prod.js",
     "lint": "eslint src/**/*.js --fix"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   }
 }
