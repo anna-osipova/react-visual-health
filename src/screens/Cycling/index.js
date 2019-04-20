@@ -1,32 +1,14 @@
 import React from 'react';
-import { Redirect, withRouter } from 'react-router-dom';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
 import CyclingLineGraph from '../../components/Cycling/CyclingLineGraph';
 import CyclingBarGraph from '../../components/Cycling/CyclingBarGraph';
-import { Screen } from '../../components/Styled';
+import Screen from '../Screen';
 
 
-const ScreensCycling = ({ email, location }) => {
-  if (!email) {
-    return <Redirect to={{ pathname: '/login', state: { from: location }}} />;
-  }
+const ScreensCycling = () => (
+  <Screen>
+    <CyclingLineGraph />
+    <CyclingBarGraph />
+  </Screen>
+);
 
-  return (
-    <Screen>
-      <CyclingLineGraph />
-      <CyclingBarGraph />
-    </Screen>
-  );
-};
-
-function mapStateToProps(state) {
-  const { user } = state;
-  const { email } = user;
-
-  return {
-    email
-  };
-}
-
-export default compose(withRouter, connect(mapStateToProps))(ScreensCycling);
+export default ScreensCycling;
