@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import moment from 'moment';
-import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip } from 'recharts';
+import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
 import { connect } from 'react-redux';
 import { fetchRunningData } from '../../actions/running';
 import { getChartMargin, colors } from '../../helpers/chart';
@@ -59,9 +59,8 @@ class RunningLineGraph extends Component {
     return (
       <ResponsiveContainer className="ResponsiveContainer">
         <LineChart height={400} data={cyclingMonthData} margin={getChartMargin()}>
-          <XAxis dataKey="month"
-                 tickFormatter={(month) => moment.utc(month + 1, 'MM').format('MMM')}
-          />
+          <CartesianGrid strokeDasharray="3 3"/>
+          <XAxis dataKey="month" tickFormatter={(month) => moment.utc(month + 1, 'MM').format('MMM')} />
           <YAxis />
           <Tooltip labelFormatter={labelFormatter} formatter={formatter} />
           {years.map((year, i) => (
